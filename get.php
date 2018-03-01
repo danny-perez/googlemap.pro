@@ -24,7 +24,8 @@ $xs = $_REQUEST['xs'];
 $ys = $_REQUEST['ys'];
 $xe = $_REQUEST['xe'];
 $ye = $_REQUEST['ye'];
-$str_uri = "https://maps.googleapis.com/maps/api/directions/json?origin=$xs,$ys&destination=$xe,$ye&key=AIzaSyBe23DtCnNlwWxEvl1K1Z_DF8DL2jy48Pg";
+$alter = $_REQUEST['alter'];
+$str_uri = "https://maps.googleapis.com/maps/api/directions/json?origin=$xs,$ys&destination=$xe,$ye&alternatives=$alter&key=AIzaSyBe23DtCnNlwWxEvl1K1Z_DF8DL2jy48Pg";
 $result = curl_get($str_uri);
 echo $result;
 ?>

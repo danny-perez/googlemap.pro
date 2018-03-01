@@ -98,6 +98,14 @@
                       <input class="form-control" id="inputWarning" type="text" value='55.574037, 37.590637'>
                     </div>
               </div>  
+              
+                          <p><b>Включить альтернативные маршруты</b></p>
+                  <div class="toggle-flip">
+                    <label>
+                      <input type="checkbox" id="flip_ind"><span class="flip-indecator" data-toggle-on="ВКЛ" data-toggle-off="ВЫКЛ"></span>
+                    </label>
+                  </div>
+              
                 <p class="mt-40 mb-20"><a class="btn btn-primary icon-btn mr-10" id='processing' href="#"><i class="fa fa-car"></i>Запустить обработку</a></p>
             </div>
           </div>
@@ -134,37 +142,43 @@
             var coord_end = $('#inputWarning').val().split(', ');
             var x_coord_end = coord_end[0];
             var y_coord_end = coord_end[1];
+            var alternative = $("#flip_ind").is(":checked");
 
-
-            var complex_uri = 'get.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end;
-  //          console.log(complex_uri);
+            var complex_uri = 'get.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end+'&alter='+alternative;
+           // console.log(complex_uri);
 
             $.ajax({
                   dataType: 'json',
                   url: complex_uri,
                   success: function(jsondata){
-                      
-                                            var header_panel_info = jsondata.routes[0].copyrights;
-                                            $('#out_title').text(header_panel_info);
-                                            var end_point = jsondata.routes[0].legs[0].end_address;
-                                            var start_point = jsondata.routes[0].legs[0].start_address;
-                                            var time_distance = jsondata.routes[0].legs[0].duration.text;
-                                            var long_distance = jsondata.routes[0].legs[0].distance.text;
-                                            var steps_route = jsondata.routes[0].legs[0].steps;
-                                            $('#text_out').html('<p><span style="color: red;">Отправная точка:</span>&emsp;&emsp;&emsp;'+start_point+'</p>');
-                                            $('#text_out').append('<p><span style="color: green;">Финиш:</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'+end_point+'</p>');
-                                            $('#text_out').append('<p><span style="color: blue;">Время в пути:</span>&emsp;&emsp;&emsp;&emsp;&emsp;'+time_distance+'</p>');
-                                            $('#text_out').append('<p><span style="color: magenta;">Общее расстояние:</span>&emsp;&emsp;'+long_distance+'</p>');
-                                            $('#route_text_out').html('Выезд из начальной точки &rArr;');
-                                            $.each(steps_route,function(index,value){
-                                                $('#route_text_out').append('&rArr;');
-                                                $('#route_text_out').append(value.html_instructions);
-                                                $('#route_text_out').append(' - '+value.distance.text);
-                                                $('#route_text_out').append(' примерно '+value.duration.text);
-                                                $('#route_text_out').append('&rArr;');
+                                            var routes = jsondata.routes;
+                                            $('#out_title').empty();
+                                            $('#text_out').empty();
+                                            $('#route_text_out').empty();
+                                            $.each(routes,function(index,jsonres){
+                                                                                var header_panel_info = jsonres.copyrights;
+                                                                                $('#out_title').text(header_panel_info);
+                                                                                var end_point = jsonres.legs[0].end_address;
+                                                                                var start_point = jsonres.legs[0].start_address;
+                                                                                var time_distance = jsonres.legs[0].duration.text;
+                                                                                var long_distance = jsonres.legs[0].distance.text;
+                                                                                var steps_route = jsonres.legs[0].steps;
+                                                                                $('#text_out').append('<hr>version '+index+'<hr>');
+                                                                                $('#text_out').append('<p><span style="color: red;">Отправная точка:</span>&emsp;&emsp;&emsp;'+start_point+'</p>');
+                                                                                $('#text_out').append('<p><span style="color: green;">Финиш:</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'+end_point+'</p>');
+                                                                                $('#text_out').append('<p><span style="color: blue;">Время в пути:</span>&emsp;&emsp;&emsp;&emsp;&emsp;'+time_distance+'</p>');
+                                                                                $('#text_out').append('<p><span style="color: magenta;">Общее расстояние:</span>&emsp;&emsp;'+long_distance+'</p>');
+                                                                                $('#route_text_out').append('<hr>version '+index+'<hr>');        
+                                                                                $('#route_text_out').append('Выезд из начальной точки &rArr;');
+                                                                                $.each(steps_route,function(index,value){
+                                                                                                        $('#route_text_out').append('&rArr;');
+                                                                                                        $('#route_text_out').append(value.html_instructions);
+                                                                                                        $('#route_text_out').append(' - '+value.distance.text);
+                                                                                                        $('#route_text_out').append(' примерно '+value.duration.text);
+                                                                                                        $('#route_text_out').append('&rArr;');
                                             });
-                                            
-                                            //console.log(jsondata);
+                                            });
+                      //                      console.log(jsondata);
                                               }
                     });
                     
