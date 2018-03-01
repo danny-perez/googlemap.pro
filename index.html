@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <title>Googlemap.pro</title>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
+  </head>
+  <body class="sidebar-mini fixed">
+    <div class="wrapper">
+      <!-- Navbar-->
+      <header class="main-header hidden-print"><a class="logo" href="index.html">Googlemap.pro</a>
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button--><a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
+          <!-- Navbar Right Menu-->
+          <div class="navbar-custom-menu">
+            <ul class="top-nav">
+              <!--Notification Menu-->
+              <li class="dropdown notification-menu"><a class="dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o fa-lg"></i></a></li>
+              <!-- User Menu-->
+              <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- Side-Nav-->
+      <aside class="main-sidebar hidden-print">
+        <section class="sidebar">
+          <div class="user-panel">
+            <div class="pull-left image"><img class="img-circle" src="/images/logo.png" alt="User Image"></div>
+            <div class="pull-left info">
+              <p>Kabbi v.0.1.0</p>
+              <p class="designation">Developer service</p>
+            </div>
+          </div>
+          <!-- Sidebar Menu-->
+          <ul class="sidebar-menu">
+            <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i><span>Главная</span></a></li>
+            <li class="treeview"><a href="#"><i class="fa fa-laptop"></i><span>UserMap</span><i class="fa fa-angle-right"></i></a></li>
+            <li><a href="charts.html"><i class="fa fa-pie-chart"></i><span>UserDirect</span></a></li>
+            <li class="treeview"><a href="#"><i class="fa fa-edit"></i><span>UserSEO</span><i class="fa fa-angle-right"></i></a></li>
+          </ul>
+        </section>
+      </aside>
+      <div class="content-wrapper">
+        <div class="page-title">
+          <div>
+            <h1><i class="fa fa-dashboard"></i> Google MAP developer service</h1>
+            <p>Проверка координат, маршрутов и времени в пути</p>
+          </div>
+          <div>
+            <ul class="breadcrumb">
+              <li><i class="fa fa-home fa-lg"></i></li>
+              <li><a href="#">Главная</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card">
+              <h3 class="card-title">Задание координат</h3>
+              <div class="col-md-6">
+                <div class="form-group has-success">
+                    <label class="control-label" for="inputSuccess">Начала маршрута X</label>
+                    <input class="form-control" id="inputSuccessXS" type="text" value='55.573721'>
+                </div>
+              </div>  
+            <div class="col-md-6">
+                <div class="form-group has-success">
+                    <label class="control-label" for="inputSuccess">Начала маршрута Y</label>
+                    <input class="form-control" id="inputSuccessYS" type="text" value='37.566561'>
+                </div>
+            </div> 
+            <br>
+            <div class="col-md-6">
+                    <div class="form-group has-warning">
+                      <label class="control-label" for="inputWarning">Input warning</label>
+                      <input class="form-control" id="inputWarningXE" type="text" value='55.574037'>
+                    </div>
+              </div>  
+            <div class="col-md-6">
+                    <div class="form-group has-warning">
+                      <label class="control-label" for="inputWarning">Input warning</label>
+                      <input class="form-control" id="inputWarningYE" type="text" value='37.590637'>
+                    </div>
+            </div>
+                <p class="mt-40 mb-20"><a class="btn btn-primary icon-btn mr-10" id='processing' href="#"><i class="fa fa-car"></i>Запустить обработку</a></p>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card">
+              <h3 class="card-title">Выдача GoogleMaps</h3>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                          <h3 class="panel-title" id='out_title'>Информация о маршруте</h3>
+                    </div>
+                        <div class="panel-body" id='text_out'>Время, расстояние</div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                          <h3 class="panel-title">Маршрут движения</h3>
+                    </div>
+                        <div class="panel-body" id='route_text_out'>Маршрут</div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Javascripts-->
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/pace.min.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+        $('#processing').click(function(e){
+            var x_coord_start = $('#inputSuccessXS').val();
+            var y_coord_start = $('#inputSuccessYS').val();
+            var x_coord_end = $('#inputWarningXE').val();
+            var y_coord_end = $('#inputWarningYE').val();
+            var complex_uri = 'get.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end;
+            $.ajax({
+                  dataType: 'json',
+                  url: complex_uri,
+                  success: function(jsondata){
+                      
+                                            var header_panel_info = jsondata.routes[0].copyrights;
+                                            $('#out_title').text(header_panel_info);
+                                            var end_point = jsondata.routes[0].legs[0].end_address;
+                                            var start_point = jsondata.routes[0].legs[0].start_address;
+                                            var time_distance = jsondata.routes[0].legs[0].duration.text;
+                                            var long_distance = jsondata.routes[0].legs[0].distance.text;
+                                            var steps_route = jsondata.routes[0].legs[0].steps;
+                                            $('#text_out').html('<p><span style="color: red;">Отправная точка:</span>&emsp;&emsp;&emsp;'+start_point+'</p>');
+                                            $('#text_out').append('<p><span style="color: green;">Финиш:</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'+end_point+'</p>');
+                                            $('#text_out').append('<p><span style="color: blue;">Время в пути:</span>&emsp;&emsp;&emsp;&emsp;&emsp;'+time_distance+'</p>');
+                                            $('#text_out').append('<p><span style="color: magenta;">Общее расстояние:</span>&emsp;&emsp;'+long_distance+'</p>');
+                                            $('#route_text_out').html('Выезд из начальной точки &rArr;');
+                                            $.each(steps_route,function(index,value){
+                                                $('#route_text_out').append('&rArr;');
+                                                $('#route_text_out').append(value.html_instructions);
+                                                $('#route_text_out').append(' - '+value.distance.text);
+                                                $('#route_text_out').append(' примерно '+value.duration.text);
+                                                $('#route_text_out').append('&rArr;');
+                                            });
+                                            
+                                            //console.log(jsondata);
+                                              }
+                    });
+        })
+    </script>
+  </body>
+</html>
