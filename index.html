@@ -99,7 +99,7 @@
                     </div>
               </div>  
               
-                          <p><b>Включить альтернативные маршруты</b></p>
+                <p><b>Включить альтернативные маршруты</b></p>
                   <div class="toggle-flip">
                     <label>
                       <input type="checkbox" id="flip_ind"><span class="flip-indecator" data-toggle-on="ВКЛ" data-toggle-off="ВЫКЛ"></span>
@@ -143,7 +143,6 @@
             var x_coord_end = coord_end[0];
             var y_coord_end = coord_end[1];
             var alternative = $("#flip_ind").is(":checked");
-
             var complex_uri = 'get.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end+'&alter='+alternative;
            // console.log(complex_uri);
 
@@ -151,6 +150,8 @@
                   dataType: 'json',
                   url: complex_uri,
                   success: function(jsondata){
+                       
+                      /**/
                                             var routes = jsondata.routes;
                                             $('#out_title').empty();
                                             $('#text_out').empty();
@@ -161,25 +162,31 @@
                                                                                 var end_point = jsonres.legs[0].end_address;
                                                                                 var start_point = jsonres.legs[0].start_address;
                                                                                 var time_distance = jsonres.legs[0].duration.text;
+                                                                                var time_distance_traffic = jsonres.legs[0].duration_in_traffic.text;
                                                                                 var long_distance = jsonres.legs[0].distance.text;
                                                                                 var steps_route = jsonres.legs[0].steps;
                                                                                 $('#text_out').append('<hr>version '+index+'<hr>');
                                                                                 $('#text_out').append('<p><span style="color: red;">Отправная точка:</span>&emsp;&emsp;&emsp;'+start_point+'</p>');
                                                                                 $('#text_out').append('<p><span style="color: green;">Финиш:</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'+end_point+'</p>');
                                                                                 $('#text_out').append('<p><span style="color: blue;">Время в пути:</span>&emsp;&emsp;&emsp;&emsp;&emsp;'+time_distance+'</p>');
+                                                                                $('#text_out').append('<p style="color: #e48100; font-weight: 900;"><span>Время с заторами:</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'+time_distance_traffic+'</p>');
                                                                                 $('#text_out').append('<p><span style="color: magenta;">Общее расстояние:</span>&emsp;&emsp;'+long_distance+'</p>');
                                                                                 $('#route_text_out').append('<hr>version '+index+'<hr>');        
                                                                                 $('#route_text_out').append('Выезд из начальной точки &rArr;');
+                                                                                var time_trasse = 0;
                                                                                 $.each(steps_route,function(index,value){
                                                                                                         $('#route_text_out').append('&rArr;');
                                                                                                         $('#route_text_out').append(value.html_instructions);
                                                                                                         $('#route_text_out').append(' - '+value.distance.text);
                                                                                                         $('#route_text_out').append(' примерно '+value.duration.text);
+                                                                                                        time_trasse = time_trasse + parseInt(value.duration.text);
                                                                                                         $('#route_text_out').append('&rArr;');
-                                            });
-                                            });
+                                                                                });
+                                                                                 $('#route_text_out').append('<hr><p style="color: red;">Время по трассе: '+time_trasse+' min</p>');
+                                            });/**/
                       //                      console.log(jsondata);
                                               }
+                                              
                     });
                     
         })
