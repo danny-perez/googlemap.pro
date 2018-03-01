@@ -56,7 +56,7 @@
           <div class="user-panel">
             <div class="pull-left image"><img class="img-circle" src="/images/logo.png" alt="User Image"></div>
             <div class="pull-left info">
-              <p>Kabbi v.0.1.0</p>
+              <p>Kabbi v.2.0.0</p>
               <p class="designation">Developer service</p>
             </div>
           </div>
@@ -88,29 +88,16 @@
               <h3 class="card-title">Задание координат</h3>
               <div class="col-md-6">
                 <div class="form-group has-success">
-                    <label class="control-label" for="inputSuccess">Начала маршрута X</label>
-                    <input class="form-control" id="inputSuccessXS" type="text" value='55.573721'>
+                    <label class="control-label" for="inputSuccess">Начала маршрута</label>
+                    <input class="form-control" id="inputSuccess" type="text" value='55.573721, 37.566561'>
                 </div>
               </div>  
             <div class="col-md-6">
-                <div class="form-group has-success">
-                    <label class="control-label" for="inputSuccess">Начала маршрута Y</label>
-                    <input class="form-control" id="inputSuccessYS" type="text" value='37.566561'>
-                </div>
-            </div> 
-            <br>
-            <div class="col-md-6">
                     <div class="form-group has-warning">
-                      <label class="control-label" for="inputWarning">Input warning</label>
-                      <input class="form-control" id="inputWarningXE" type="text" value='55.574037'>
+                      <label class="control-label" for="inputWarning">Конец маршрута</label>
+                      <input class="form-control" id="inputWarning" type="text" value='55.574037, 37.590637'>
                     </div>
               </div>  
-            <div class="col-md-6">
-                    <div class="form-group has-warning">
-                      <label class="control-label" for="inputWarning">Input warning</label>
-                      <input class="form-control" id="inputWarningYE" type="text" value='37.590637'>
-                    </div>
-            </div>
                 <p class="mt-40 mb-20"><a class="btn btn-primary icon-btn mr-10" id='processing' href="#"><i class="fa fa-car"></i>Запустить обработку</a></p>
             </div>
           </div>
@@ -141,11 +128,17 @@
     <script src="js/main.js"></script>
     <script type="text/javascript">
         $('#processing').click(function(e){
-            var x_coord_start = $('#inputSuccessXS').val();
-            var y_coord_start = $('#inputSuccessYS').val();
-            var x_coord_end = $('#inputWarningXE').val();
-            var y_coord_end = $('#inputWarningYE').val();
+            var coord_start = $('#inputSuccess').val().split(', ');
+            var x_coord_start = coord_start[0];
+            var y_coord_start = coord_start[1];
+            var coord_end = $('#inputWarning').val().split(', ');
+            var x_coord_end = coord_end[0];
+            var y_coord_end = coord_end[1];
+
+
             var complex_uri = 'get.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end;
+  //          console.log(complex_uri);
+
             $.ajax({
                   dataType: 'json',
                   url: complex_uri,
@@ -174,6 +167,7 @@
                                             //console.log(jsondata);
                                               }
                     });
+                    
         })
     </script>
   </body>
