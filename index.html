@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -56,7 +57,7 @@
           <div class="user-panel">
             <div class="pull-left image"><img class="img-circle" src="/images/logo.png" alt="User Image"></div>
             <div class="pull-left info">
-              <p>Kabbi v.2.0.0</p>
+              <p>Kabbi v.4.0.1</p>
               <p class="designation">Developer service</p>
             </div>
           </div>
@@ -124,6 +125,20 @@
                     </div>
                         <div class="panel-body" id='route_text_out'>Маршрут</div>
                 </div>
+                
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                          <h3 class="panel-title" id='out_title_gootax'>Информация о маршруте ключ GOOTAX</h3>
+                    </div>
+                        <div class="panel-body" id='text_out_gootax'>Время, расстояние ключ GOOTAX</div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                          <h3 class="panel-title">Маршрут движения ключ GOOTAX</h3>
+                    </div>
+                        <div class="panel-body" id='route_text_out_gootax'>Маршрут</div>
+                </div>
+                
             </div>
           </div>
         </div>
@@ -144,14 +159,15 @@
             var y_coord_end = coord_end[1];
             var alternative = $("#flip_ind").is(":checked");
             var complex_uri = 'get.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end+'&alter='+alternative;
-           // console.log(complex_uri);
+            var complex_uri2 = 'get2.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end+'&alter='+alternative;
+            var complex_uri3 = 'get3.php?xs='+x_coord_start+'&ys='+y_coord_start+'&xe='+x_coord_end+'&ye='+y_coord_end+'&alter='+alternative;
 
             $.ajax({
                   dataType: 'json',
                   url: complex_uri,
                   success: function(jsondata){
                        
-                      /**/
+                      
                                             var routes = jsondata.routes;
                                             $('#out_title').empty();
                                             $('#text_out').empty();
@@ -183,8 +199,52 @@
                                                                                                         $('#route_text_out').append('&rArr;');
                                                                                 });
                                                                                  $('#route_text_out').append('<hr><p style="color: red;">Время по трассе: '+time_trasse+' min</p>');
-                                            });/**/
-                      //                      console.log(jsondata);
+                                            });
+                                            //console.log(jsondata);
+                                              }
+                                              
+                    });
+                    
+                    
+                $.ajax({
+                  dataType: 'json',
+                  url: complex_uri2,
+                  success: function(jsondata){
+                       
+                      
+                                            var routes = jsondata.routes;
+                                            $('#out_title_gootax').empty();
+                                            $('#text_out_gootax').empty();
+                                            $('#route_text_out_gootax').empty();
+                                            $.each(routes,function(index,jsonres){
+                                                                                var header_panel_info = jsonres.copyrights;
+                                                                                $('#out_title_gootax').text(header_panel_info);
+                                                                                var end_point = jsonres.legs[0].end_address;
+                                                                                var start_point = jsonres.legs[0].start_address;
+                                                                                var time_distance = jsonres.legs[0].duration.text;
+                                                                                var time_distance_traffic = jsonres.legs[0].duration_in_traffic.text;
+                                                                                var long_distance = jsonres.legs[0].distance.text;
+                                                                                var steps_route = jsonres.legs[0].steps;
+                                                                                $('#text_out_gootax').append('<hr>version '+index+'<hr>');
+                                                                                $('#text_out_gootax').append('<p><span style="color: red;">Отправная точка:</span>&emsp;&emsp;&emsp;'+start_point+'</p>');
+                                                                                $('#text_out_gootax').append('<p><span style="color: green;">Финиш:</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'+end_point+'</p>');
+                                                                                $('#text_out_gootax').append('<p><span style="color: blue;">Время в пути:</span>&emsp;&emsp;&emsp;&emsp;&emsp;'+time_distance+'</p>');
+                                                                                $('#text_out_gootax').append('<p style="color: #e48100; font-weight: 900;"><span>Время с заторами:</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;'+time_distance_traffic+'</p>');
+                                                                                $('#text_out_gootax').append('<p><span style="color: magenta;">Общее расстояние:</span>&emsp;&emsp;'+long_distance+'</p>');
+                                                                                $('#route_text_out_gootax').append('<hr>version '+index+'<hr>');        
+                                                                                $('#route_text_out_gootax').append('Выезд из начальной точки &rArr;');
+                                                                                var time_trasse = 0;
+                                                                                $.each(steps_route,function(index,value){
+                                                                                                        $('#route_text_out_gootax').append('&rArr;');
+                                                                                                        $('#route_text_out_gootax').append(value.html_instructions);
+                                                                                                        $('#route_text_out_gootax').append(' - '+value.distance.text);
+                                                                                                        $('#route_text_out_gootax').append(' примерно '+value.duration.text);
+                                                                                                        time_trasse = time_trasse + parseInt(value.duration.text);
+                                                                                                        $('#route_text_out_gootax').append('&rArr;');
+                                                                                });
+                                                                                 $('#route_text_out_gootax').append('<hr><p style="color: red;">Время по трассе: '+time_trasse+' min</p>');
+                                            });
+                                            //console.log(jsondata);
                                               }
                                               
                     });
